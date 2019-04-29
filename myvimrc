@@ -1,0 +1,267 @@
+
+" https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+source ~/.myvim-plug/plug.vim
+set nocompatible
+
+" vim-plug
+call plug#begin('~/.myvim-plug/plugged')
+" tab跳转管理 : Esc + num
+Plug 'vim-scripts/TabBar'
+" 代码补齐
+Plug 'Valloric/YouCompleteMe'
+Plug 'vim-scripts/OmniCppComplete'
+" 代码片段补全
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+" markdown预览支持
+Plug 'suan/vim-instant-markdown'
+" 主题
+Plug 'tomasr/molokai'
+" 状态栏
+Plug 'vim-airline/vim-airline'
+" 书签功能
+Plug 'MattesGroeger/vim-bookmarks'
+" 按字符串对齐
+Plug 'Yggdroot/indentLine'
+" 注释功能增强
+Plug 'scrooloose/nerdcommenter'
+" 显示文件标签
+Plug 'majutsushi/tagbar'
+Plug 'octol/vim-cpp-enhanced-highlight'
+" 代码折叠  折叠zc, 取消折叠zo, 取消所有折叠zr（zC, zO, zR）
+Plug 'LucHermitte/lh-vim-lib'
+Plug 'LucHermitte/VimFold4C'
+" 全局搜索
+Plug 'dyng/ctrlsf.vim'
+Plug 'terryma/vim-multiple-cursors'
+" 项目窗口展示
+Plug 'scrooloose/nerdtree'
+" 快速移动，支持几乎任意位置的匹配项跳转
+Plug 'easymotion/vim-easymotion'
+" 补全配对符号
+Plug 'tpope/vim-surround'
+"在vim中对齐 ‘=’ , ‘:’ , ‘|’ 等符号的插件
+Plug 'godlygeek/tabular'
+call plug#end()
+
+
+set autoread
+set nobomb
+
+" 开启插件功能
+filetype plugin indent on
+set completeopt=longest,menu
+
+syntax on
+syntax enable
+" set number
+set mouse=
+set noic
+
+" 设置颜色模板
+let g:molokai_original=1
+set t_Co=256
+set t_ut=
+colorscheme molokai
+
+" set paste
+set pastetoggle=<F5>
+
+
+" 设置backsapce
+set backspace=indent,eol,start
+
+" 开启代码折叠
+set foldmethod=syntax
+set foldlevel=100
+
+" 设置tags
+set tags=tags;
+" set autochdir
+
+" 开启显示换行
+set wrap
+
+" 高亮显示匹配的括号
+set showmatch
+
+" 高亮搜索词
+set hlsearch
+
+" 为C程序提供自动缩进
+set cindent
+set autoindent
+set smartindent
+
+"突出显示当前行
+set cursorline
+
+" 统一缩进为4
+set expandtab
+set smarttab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" 在处理未保存或只读文件的时候，弹出确认
+set confirm
+
+" Tabular 用正则来设置对齐
+map ta :Tabular /
+
+
+" 代码片段补全 : UltiSnips 的 tab 键与 YCM 冲突，重新设定
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+
+
+" 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
+nnoremap <Leader>sp :CtrlSF<CR>
+
+
+" YouCompleteMe
+"
+"配置默认文件路径
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"打开vim时不再询问是否加载ycm_extra_conf.py配置
+let g:ycm_confirm_extra_conf = 0
+"set completeopt=longest,menu
+"自动开启语义补全
+let g:ycm_seed_identifiers_with_syntax = 1
+"主动开启语义补全
+"let g:ycm_key_invoke_completion = '<c-z>'
+"set completeopt=menu,menuone
+"noremap <c-z> <NOP>
+
+let g:ycm_filetype_whitelist = {
+            \ "c":1,
+            \ "cpp":1,
+            \ "python":1,
+            \ "sh":1,
+            \ }
+"语义补全
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,lua,javascript,erlang,perl': ['->', '.', '::'],
+            \ }
+"在注释中也开启补全
+let g:ycm_complete_in_comments = 1
+" 禁止缓存匹配项，每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+"完整函数信息
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"字符串中也开启补全
+let g:ycm_complete_in_strings = 1
+"开启基于tag的补全，可以在这之后添加需要的标签路径
+let g:ycm_collect_identifiers_from_tags_files = 1
+" 引入 C++ 标准库tags
+set tags+=~/sys.tags
+"开始补全的字符数
+let g:ycm_min_num_of_chars_for_completion = 2
+"补全后自动关闭预览窗口
+let g:ycm_autoclose_preview_window_after_completion = 1
+"禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+"离开插入模式后自动关闭预览窗口
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"语法关键字补全
+let g:ycm_seed_identifiers_with_syntax = 1
+"整合UltiSnips的提示
+let g:ycm_use_ultisnips_completer = 1
+" 跳转快捷键
+nnoremap <c-k> :YcmCompleter GoToDeclaration<CR>|
+nnoremap <c-h> :YcmCompleter GoToDefinition<CR>|
+nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
+"与syntastic有冲突，建议关闭
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>>'
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_echo_current_diagnostic = 0
+
+
+" 设置NERDTree插件
+nmap <F7> :NERDTreeToggle<CR>
+"设置NERDTree子窗口宽度
+let NERDTreeWinSize=20
+"设置NERDTree子窗口位置
+let NERDTreeWinPos="right"
+
+
+" vim-bookmarks
+let g:bookmark_sign = '♥'
+let g:bookmark_highlight_lines = 1
+map <silent> bt :BookmarkToggle<CR>
+map <silent> bn :BookmarkNext<CR>
+map <silent> bp :BookmarkPrev<CR>
+map <silent> bd :BookmarkClear<CR>
+map <silent> ba :BookmarkShowAll<CR>
+
+" 清除行尾空格
+nmap bc :%s/ *$//g<cr>:nohl<cr>
+
+" TagBar插件
+let g:tagbar_sort = 0
+let g:tagbar_left = 1
+let g:tagbar_width = 25
+let g:tagbar_compact = 1
+let g:tagbar_foldlevel = 1
+nmap wt :TagbarToggle<cr>
+
+" tabbar 插件
+let g:Tb_UseSingleClick = 1
+map <F12> :bdelete<CR>
+
+" indent_line 缩进中显示细线
+let g:indentLine_enabled = 0
+map <Leader>l :IndentLinesToggle<CR>
+let g:indentLine_first_char =  '¦'
+let g:indentLine_char = '¦'
+let g:indentLine_fileType = ['c', 'h', 'hpp', 'cpp', 'py', 'sh']
+
+" easymotion
+let g:EasyMotion_smartcase = 1
+map ,h <Plug>(easymotion-linebackward)
+map ,j <Plug>(easymotion-j)
+map ,k <Plug>(easymotion-k)
+map ,l <Plug>(easymotion-lineforward)
+map ,f <Plug>(easymotion-f)
+map ,F <Plug>(easymotion-F)
+map ,/ <Plug>(easymotion-sn)
+omap ,/ <Plug>(easymotion-tn)
+
+
+" vim-multiple-cursors
+let g:multi_cursor_next_key='<S-n>'
+let g:multi_cursor_skip_key='<S-k>'
+
+
+" plugin - NERD_commenter.vim	注释代码用的，
+" " [count],cc 光标以下count行逐行添加注释(7,cc)
+" " [count],cu 光标以下count行逐行取消注释(7,cu)
+" " [count],cm 光标以下count行尝试添加块注释(7,cm)
+" " ,cA 在行尾插入 /* */,并且进入插入模式。 这个命令方便写注释。
+" " 注：count参数可选，无则默认为选中行或当前行
+" "-----------------------------------------------------------------
+let NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
+let NERDCompactSexyComs=1   " 多行注释时样子更好看
+
+" 删除除当前窗口外的所有缓存
+map <leader>bda :call DeleteAllBuffersInWindow()<cr>
+fun! DeleteAllBuffersInWindow()
+    let s:curWinNr = winnr()
+    if winbufnr(s:curWinNr) == 1
+        ret
+    endif
+    let s:curBufNr = bufnr("%")
+    exe "bn"
+    let s:nextBufNr = bufnr("%")
+    while s:nextBufNr != s:curBufNr
+        exe "bn"
+        exe "bdel ".s:nextBufNr
+        let s:nextBufNr = bufnr("%")
+    endwhile
+endfun
+
