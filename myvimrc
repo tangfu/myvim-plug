@@ -211,6 +211,7 @@ let g:tagbar_foldlevel = 1
 nmap wt :TagbarToggle<cr>
 
 " tabbar 插件
+" plugged/TabBar/plugin/tabbar.vim 修改 跳转快捷键到 t0~t9
 let g:Tb_UseSingleClick = 1
 map <F12> :bdelete<CR>
 
