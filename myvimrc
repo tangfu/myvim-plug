@@ -8,13 +8,13 @@ call plug#begin('~/.myvim-plug/plugged')
 " tab跳转管理 : Esc + num
 Plug 'vim-scripts/TabBar'
 " 代码补齐
-Plug 'Valloric/YouCompleteMe'
-Plug 'vim-scripts/OmniCppComplete'
+Plug 'Valloric/YouCompleteMe', {'for': ['c', 'cpp']}
+Plug 'vim-scripts/OmniCppComplete', {'for': ['c', 'cpp']}
 " 代码片段补全
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'sirver/ultisnips', {'for': ['c', 'cpp']}
+Plug 'honza/vim-snippets', {'for': [ 'c', 'cpp']} 
 " markdown预览支持
-Plug 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 " 主题
 Plug 'tomasr/molokai'
 " 状态栏
@@ -27,15 +27,15 @@ Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter'
 " 显示文件标签
 Plug 'majutsushi/tagbar'
-Plug 'octol/vim-cpp-enhanced-highlight'
-" 代码折叠  折叠zc, 取消折叠zo, 取消所有折叠zr（zC, zO, zR）
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'LucHermitte/VimFold4C'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
+" 代码折叠  折叠zc, 取消折叠zo, 取消所有折叠zr（zC, zO, zR） -- 严重影响性能
+" Plug 'LucHermitte/lh-vim-lib'
+" Plug 'LucHermitte/VimFold4C'
 " 全局搜索
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
 " 项目窗口展示
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 " 快速移动，支持几乎任意位置的匹配项跳转
 Plug 'easymotion/vim-easymotion'
 " 补全配对符号
@@ -118,6 +118,9 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
 " 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
 nnoremap <Leader>sp :CtrlSF<CR>
+
+" airline
+let g:airline#extensions#tagbar#enabled = 0
 
 
 " YouCompleteMe
