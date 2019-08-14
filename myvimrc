@@ -25,7 +25,8 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Yggdroot/indentLine'
 " 注释功能增强
 Plug 'scrooloose/nerdcommenter'
-" 显示文件标签
+" 查看当前代码文件中的变量和函数列表的插件，
+" Go 需要 https://github.com/jstemmer/gotags 支持
 Plug 'majutsushi/tagbar'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 " 代码折叠  折叠zc, 取消折叠zo, 取消所有折叠zr（zC, zO, zR） -- 严重影响性能
