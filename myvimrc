@@ -12,7 +12,7 @@ Plug 'Valloric/YouCompleteMe', {'for': ['c', 'cpp']}
 Plug 'vim-scripts/OmniCppComplete', {'for': ['c', 'cpp']}
 " 代码片段补全
 Plug 'sirver/ultisnips', {'for': ['c', 'cpp']}
-Plug 'honza/vim-snippets', {'for': [ 'c', 'cpp']} 
+Plug 'honza/vim-snippets', {'for': [ 'c', 'cpp']}
 " markdown预览支持
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 " 主题
@@ -43,6 +43,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 "在vim中对齐 ‘=’ , ‘:’ , ‘|’ 等符号的插件
 Plug 'godlygeek/tabular'
+"自动识别编码
+Plug 'mbbill/fencview'
 call plug#end()
 
 
@@ -242,6 +244,16 @@ omap ,/ <Plug>(easymotion-tn)
 let g:multi_cursor_next_key='<S-n>'
 let g:multi_cursor_skip_key='<S-k>'
 
+
+" fencview
+set encoding=utf-8
+set langmenu=zh_CN.UTF-8
+language message zh_CN.UTF-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1,euc-cn,gbk
+" let g:fencview_autodetect=1
+" let g:fencview_auto_patterns='*'
+" let g:fencview_checklines = 10
+map <F3> :FencAutoDetect<cr>
 
 " plugin - NERD_commenter.vim	注释代码用的，
 " " [count],cc 光标以下count行逐行添加注释(7,cc)
