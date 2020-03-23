@@ -11,6 +11,7 @@ wget -P /etc/yum.repos.d/  https://copr.fedorainfracloud.org/coprs/lbiaggi/vim80
 
 # install vim
 yum install vim-enhanced sudo -y
+根据需要添加alias vi=vim
 
 2. 安装插件
 :PlugInstall
